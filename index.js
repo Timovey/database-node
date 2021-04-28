@@ -6,10 +6,9 @@ const PageRouter = require('./routes/route.page')
 
 const port = 8000
 
-
-
 app.use(express.json())
 app.use('/api', ComponentRouter)
+
 
 app.use('/page', PageRouter)
 

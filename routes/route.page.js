@@ -11,7 +11,6 @@ router.get('/index.html', (req, res) => {
         res.status(400);
         console.log(ex);
     }
-
 });
 
 router.get('/seller.html', (req, res) => {
@@ -23,7 +22,6 @@ router.get('/seller.html', (req, res) => {
         res.status(400);
         console.log(ex);
     }
-
 });
 
 module.exports = router
