@@ -14,7 +14,6 @@ router.get('/index.html', (req, res) => {
 });
 router.get('/script.js', (req, res) => {
     try {
-        console.log("sdccds");
         res.sendFile(path.join(__dirname, '../scripts/script.js'));
         res.status(200);
     }
@@ -24,10 +23,19 @@ router.get('/script.js', (req, res) => {
     }
 });
 
-router.get('/juery.js', (req, res) => {
+router.get('/jquery.js', (req, res) => {
     try {
-        console.log("sdccds");
-        res.sendFile(path.join(__dirname, '../scripts/juery.js'));
+        res.sendFile(path.join(__dirname, '../scripts/jquery.js'));
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
+router.get('/style.css', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../css/style.css'));
         res.status(200);
     }
     catch (ex) {

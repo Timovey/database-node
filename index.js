@@ -9,7 +9,6 @@ const port = 8000
 app.use(express.json())
 app.use('/api', ComponentRouter)
 
-
 app.use('/page', PageRouter)
 
 app.use((req, res, next) => {
@@ -20,7 +19,7 @@ app.use((req, res, next) => {
     console.error(err.stack)
     res.status(500).send('Something broke!')
   })
-  
+
 app.listen(port, () => {
     console.log(`Server starder on port ${port}`)
 });

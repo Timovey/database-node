@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost:8000/page/style.css">
     <title>Главная</title>
 </head>
 
@@ -29,16 +30,17 @@
     </nav>
 
     <div class="container">
-        <form action="http://localhost:8000/api/Components" method="get">
+        <form action="" method="get">
             <input type="text" name="name_component">
-            <input type="text" name="vf">
             <input type="submit" value="Отправить">
         </form>
-        <table id="1"></table>
     </div>
-
-    <script src="http://localhost:8000/page/juery.js"></script>
-    <script src="http://localhost:8000/page/script.js"></script>
+    <div class="table__container" id="2">
+        <table id="1" class="table__standart">
+        </table>
+    </div>
+    <script type="text/javascript" src="http://localhost:8000/page/jquery.js"></script>
+    <script type="text/javascript" src="http://localhost:8000/page/script.js"></script>
 </body>
 
 </html>
