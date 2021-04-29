@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="http://localhost:8000/page/style.css">
-    <title>Покупатели</title>
+    <title>Продавец</title>
 </head>
 
 <body>
@@ -26,21 +26,25 @@
             </ul>
         </nav>
     </header>
-
+  
     <section class="add">
         <div class="container">
-            <div class="link">
-                <a href="customer.add.html">Добавить</a>
-            </div> 
+            <form action="#" method="get">
+                <input id="3" type="text" name="name" value="Оляc">
+                <input id="4" type="text" name="suname" value="Грубая">
+                <div class="btn">
+                    <input type="submit" value="Изменить">
+                    <button>
+                        <a href="customer.html">Отмена</a>
+                    </button>
+                </div>
+
+            </form>
         </div>
     </section>
-    
-    <div class="table__container" id="2">
-        <table id="1" class="table__standart" class="table-success">
-        </table>
-    </div>
+
     <script type="text/javascript" src="http://localhost:8000/page/jquery.js"></script>
-    <script type="text/javascript" src="http://localhost:8000/page/script.customer.js"></script>
+    <script type="text/javascript" src="http://localhost:8000/page/script.updcustomer.js"></script>
 </body>
 
 </html>

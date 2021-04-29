@@ -45,6 +45,27 @@ router.get('/script.updseller.js', (req, res) => {
         console.log(ex);
     }
 });
+router.get('/script.customer.js', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../scripts/script.customer.js'));
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
+router.get('/script.updcustomer.js', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../scripts/script.updcustomer.js'));
+        
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
 router.get('/component.add.html', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, '../views/component.add.html'));
@@ -110,6 +131,50 @@ router.get('/seller.update.html', (req, res) => {
             data = data.replace('<input id="3" type="text" name="name">', `<input id="3" type="text" name="name" value="${name}">`);
             data = data.replace('<input id="4" type="text" name="suname">', `<input id="4" type="text" name="suname" value="${surname}">`);
             data = data.replace('<input id="5" type="number" name="salary">', `<input id="5" type="number" name="salary" value="${salary}">`);
+            //console.log(name);
+            //console.log(data);
+
+            fs.unlinkSync(filePathSend,  function(err){
+                if(err) throw err;
+            });
+            fs.writeFileSync(filePathSend , data, function(err) {
+            });
+            res.sendFile(filePathSend);
+        
+            res.status(200);
+        });
+
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
+
+router.get('/customer.add.html', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../views/customer.add.html'));
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
+
+router.get('/customer.update.html', (req, res) => {
+    try {
+        const name = req.query.name;
+        const surname = req.query.surname;
+        const salary = req.query.salary;
+        const filePath = path.join(__dirname, '../views/customer.update.html');
+        const filePathSend = path.join(__dirname, '../views/customer.update.one.html');
+
+        fs.readFile(filePath, function(err, data) {
+            if(err) throw err;
+            data = data.toString();
+            data = data.replace('<input id="3" type="text" name="name">', `<input id="3" type="text" name="name" value="${name}">`);
+            data = data.replace('<input id="4" type="text" name="suname">', `<input id="4" type="text" name="suname" value="${surname}">`);
             //console.log(name);
             //console.log(data);
 
