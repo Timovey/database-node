@@ -3,11 +3,12 @@ const app = express()
 
 const ComponentRouter = require('./routes/route.component')
 const PageRouter = require('./routes/route.page')
-
+const SellerRouter = require('./routes/route.seller')
 const port = 8000
 
 app.use(express.json())
 app.use('/api', ComponentRouter)
+app.use('/api', SellerRouter)
 
 app.use('/page', PageRouter)
 

@@ -3,11 +3,14 @@ const db = require('../consetting')
 class ComponentController {
 
     async createComponent(req, res) {
-        
-        const { name_component } = req.body
-        const newComponent = await db.query('INSERT INTO Component (Name) values ($1) RETURNING Name', [name_component])
-        res.json(newComponent.rows[0])
-
+        try {
+            const { name_component } = req.body
+            const newComponent = await db.query('INSERT INTO Component (Name) values ($1) RETURNING Name', [name_component])
+            res.json(newComponent.rows[0]).status(200);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
     };
 
     async getAllComponents(req, res) {
@@ -23,8 +26,8 @@ class ComponentController {
 
     async getComponent(req, res) {
         try {
-            const id = req.params.id;
-            const Component = await db.query('SELECT Name From Component WHERE id_component = $1', [id]);
+            const name = req.query.name_component;
+            const Component = await db.query('SELECT component_id From Component WHERE Name = $1', [name]);
             res.json(Component.rows[0]);
         }
         catch (ex) {
@@ -45,9 +48,11 @@ class ComponentController {
 
     async deleteComponent(req, res) {
         try {
-            const id = req.params.id;
-            const Component = await db.query('DELETE From Component WHERE id_component = $1', [id]);
-            res.json('Delete Component with id ' + id);
+            const name = req.query.name_component;
+            console.log("sdcsdc");
+            console.log(name);
+            const Component = await db.query('DELETE From Component WHERE Name = $1', [name]);
+            res.json('Component delete');
         }
         catch (ex) {
             console.log(ex.massage);
