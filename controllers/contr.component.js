@@ -3,8 +3,9 @@ const db = require('../consetting')
 class ComponentController {
 
     async createComponent(req, res) {
+        
         const { name_component } = req.body
-        const newComponent = await db.query('INSERT INTO Component(name) values ($1) RETURNING Name', [name_component])
+        const newComponent = await db.query('INSERT INTO Component (Name) values ($1) RETURNING Name', [name_component])
         res.json(newComponent.rows[0])
 
     };

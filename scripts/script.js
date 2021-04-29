@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
             $('#1').append(table);
         }
 
-        console.log(json);    
+        //console.log(json);    
 
     });
 });
@@ -24,47 +24,31 @@ formElem.addEventListener('submit', function (event) {
     new FormData(formElem);
 });
 
-
+async function updateComponent(val) {
+    try {
+        console.log(val);
+        const url = "http://localhost:8000/api/Component";
+        const response = await fetch(url, {
+          method: 'POST', 
+          body: JSON.stringify({ "name_component": val }), // данные могут быть 'строкой' или {объектом}!
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const json = await response.json();
+        console.log('Успех:', JSON.stringify(json));
+        return json;
+      } catch (error) {
+        console.error('Ошибка:', error);
+      }
+}
 formElem.addEventListener("formdata", event => {
     const data = event.formData;
 
-    const entries = [...data.entries()];
+    //const entries = [...data.entries()];
     const values = [...data.values()];
-    console.log(entries);
-    console.log(values);
-
+    var c = updateComponent(values[0]);
     console.log("Все норм, данные отправлены");
 
-    // var req = new XMLHttpRequest();
-    // req.open('GET', "http://localhost:8000/api/Components");
-    // req.responseType = 'json';
-    // req.send();
-    // console.log(req);
-    // var request = JSON.stringify("http://localhost:8000/api/Components");
-    //console.log(request);
-
-    // fetch("http://localhost:8000/api/Components").then(function (response) {
-    //     response.json().then(function (json) {
-    //         console.log(json);
-
-    //         var tableelement = $("#1");        //get table id from jquery
-    //         console.log(tableelement);
-    //         var str = JSON.stringify(json);
-    //         console.log(str);
-    //         console.log(createRow(str));
-    //         tableelement.append(createRow(json, ['name']));            //call this function from the action you want to show table
-
-    //         function createRow(Object) {                              //dynamically adding rows to the Table
-
-    //             var trElement = "<tr>";                 //design this according to your requirement
-
-    //             for (var s = 0; s < Object.length; s++) {
-    //                 trElement += "<td >" + Object[s].Time + "</td>";
-    //             }
-
-    //             return trElement;
-    //         }
-    //     });
-    // });
-
+   
 });
