@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div>
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Заказ ремонта</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="seller.html">Трудоустройство</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Оценка работы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">О Нас</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form action="http://localhost:8000/api/Components" method="get">
+            <input type="text" name="name_component">
+            <input type="text" name="vf">
+            <input type="submit" value="Отправить">
+        </form>
+        <table id="1"></table>
+    </div>
+
+    <script src="http://localhost:8000/page/juery.js"></script>
+    <script src="http://localhost:8000/page/script.js"></script>
+</body>
+
+</html>
