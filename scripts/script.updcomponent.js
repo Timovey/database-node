@@ -1,17 +1,16 @@
-const name_comp;
-const id;
+var name_comp = "";
+var id = -1;
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM готов!");
     var elem = $('#3');
-    
+    elem.prop('required', true);
     name_comp = elem.attr('value');
-    let url = "http://localhost:8000/api/Component"
-    const response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({ "name_component": val }), // данные могут быть 'строкой' или {объектом}!
-        headers: {
-            'Content-Type': 'application/json'
-        }
+    console.log(name_comp);
+    let url = `http://localhost:8000/api/Component?name_component=${name_comp}`
+
+    $.getJSON(url, function (json) {
+        id = json.id_component;
+        
     });
 });
 
@@ -22,13 +21,13 @@ formElem.addEventListener('submit', function (event) {
     new FormData(formElem);
 });
 
-async function addComponent(val) {
+async function updateComponent(val) {
     try {
         console.log(val);
         const url = "http://localhost:8000/api/Component";
         const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({ "name_component": val }), // данные могут быть 'строкой' или {объектом}!
+            method: 'PUT',
+            body: JSON.stringify({"id": id, "name_component": val }), // данные могут быть 'строкой' или {объектом}!
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -45,5 +44,5 @@ formElem.addEventListener("formdata", event => {
     const data = event.formData;
 
     const values = [...data.values()];
-    addComponent(values[0]);
+    updateComponent(values[0]);
 });

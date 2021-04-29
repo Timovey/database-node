@@ -27,7 +27,8 @@ class ComponentController {
     async getComponent(req, res) {
         try {
             const name = req.query.name_component;
-            const Component = await db.query('SELECT component_id From Component WHERE Name = $1', [name]);
+            //console.log(name);
+            const Component = await db.query('SELECT id_component From Component WHERE Name = $1', [name]);
             res.json(Component.rows[0]);
         }
         catch (ex) {
@@ -49,7 +50,6 @@ class ComponentController {
     async deleteComponent(req, res) {
         try {
             const name = req.query.name_component;
-            console.log("sdcsdc");
             console.log(name);
             const Component = await db.query('DELETE From Component WHERE Name = $1', [name]);
             res.json('Component delete');

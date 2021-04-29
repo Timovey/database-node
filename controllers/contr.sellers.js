@@ -4,8 +4,9 @@ class SellerController {
 
     async createSeller(req, res) {
         try {
-            const { name, surname, salary } = req.body
-            const newSeller = await db.query('INSERT INTO Seller (Name, Surname, Salary) values ($1, $2, $3) RETURNING Name, Surname', [name, surname, salary])
+            console.log("sdccds");
+            const { name, surname, salary} = req.body
+            const newSeller = await db.query('INSERT INTO Seller (Name, Surname, Salary) values ($1, $2, $3) RETURNING Name, Surname, Salary', [name, surname, salary])
             res.json(newSeller.rows[0]).status(200);
         }
         catch (ex) {
@@ -26,8 +27,10 @@ class SellerController {
 
     async getSeller(req, res) {
         try {
-            const { name, surname, salary } = req.body
-            const Seller = await db.query('SELECT seller_id From Seller WHERE Name = $1 AND Surname = $2 AND Salary = $3', [name, surname, salary]);
+            const Name = req.query.name;
+            const Surame = req.query.surname;
+            //console.log(name);
+            const Seller = await db.query('SELECT id_seller From Seller WHERE Name = $1 AND Surname = $2', [Name, Surame]);
             res.json(Seller.rows[0]);
         }
         catch (ex) {
@@ -36,9 +39,10 @@ class SellerController {
     }
     async updateSeller(req, res) {
         try {
-            const { name, surname, salary } = req.body;
-            const Seller = await db.query('UPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name', [name_component, id]);
-            res.json(Component.rows[0]);
+            const { id, name, surname, salary} = req.body;
+            //console.log(req.body);
+            const Seller = await db.query('UPDATE Seller set Name = $1, Surname = $2, Salary = $3 WHERE id_seller = $4 RETURNING Name, Surname, Salary', [name, surname, salary, id]);
+            res.json(Seller.rows[0]);
         }
         catch (ex) {
             console.log(ex.massage);
@@ -48,9 +52,12 @@ class SellerController {
 
     async deleteSeller(req, res) {
         try {
-            const id = req.params.id;
-            const Component = await db.query('DELETE From Component WHERE id_component = $1', [id]);
-            res.json('Delete Component with id ' + id);
+            const Name = req.query.name;
+            const Surame = req.query.surname;
+            console.log("dd");
+            const Seller = await db.query('DELETE From Seller WHERE Name = $1 AND Surname = $2', [Name, Surame]);
+            console.log("sss");
+            res.json('Seller delete');
         }
         catch (ex) {
             console.log(ex.massage);
