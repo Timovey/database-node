@@ -41,7 +41,7 @@ class CustomerController {
     async updateCustomer(req, res) {
         try {
             const { id, name, surname} = req.body;
-            console.log(req.body);
+            //console.log(req.body);
             const Customer = await db.query('UPDATE Customer set Name = $1, Surname = $2 WHERE id_customer = $3 RETURNING Name, Surname', [name, surname, id]);
             res.json(Customer.rows[0]);
         }

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var table = $('#1');
         //console.log(table);
         table.remove;
-        table.append(`<thead><tr><th scope="col">Имя</th><th scope="col">Действия</th></tr></thead><tbody>`);
+        table.append(`<thead><tr><th scope="col">Название</th><th scope="col">Действия</th></tr></thead><tbody>`);
         for (var i in json) {
 
             table.append("<tr><td>" + json[i].name + "</td>" + `<td class="edit_menu"><a class='edit_menu_item' href="http://localhost:8000/page/component.update.html?name_component=${json[i].name}">

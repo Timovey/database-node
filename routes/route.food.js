@@ -1,11 +1,11 @@
 const Router = require('express')
 const router = new Router()
-const FoodController = require('../controllers/contr.foods')
+const FoodController = require('../controllers/contr.food')
 
 router.post('/Food', FoodController.createFood)
 router.get('/Foods', FoodController.getAllFoods)
-router.get('/Food/:name_food', FoodController.getFood)
-router.put('/Food', FoodController.updateFood)
-router.delete('/Food/:name_food', FoodController.deleteFood)
+router.get('/Food', FoodController .getFood)
+router.put('/Food', FoodController .updateFood)
+router.get('/Fooddel', FoodController .deleteFood)
 
 module.exports = router

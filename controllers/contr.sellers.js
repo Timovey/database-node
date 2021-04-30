@@ -4,7 +4,7 @@ class SellerController {
 
     async createSeller(req, res) {
         try {
-            console.log("sdccds");
+            //console.log("sdccds");
             const { name, surname, salary} = req.body
             const newSeller = await db.query('INSERT INTO Seller (Name, Surname, Salary) values ($1, $2, $3) RETURNING Name, Surname, Salary', [name, surname, salary])
             res.json(newSeller.rows[0]).status(200);

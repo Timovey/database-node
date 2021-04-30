@@ -5,12 +5,15 @@ const ComponentRouter = require('./routes/route.component')
 const PageRouter = require('./routes/route.page')
 const SellerRouter = require('./routes/route.seller')
 const CustomerRouter = require('./routes/route.customer')
+const FoodRouter = require('./routes/route.food')
+
 const port = 8000
 
 app.use(express.json())
 app.use('/api', ComponentRouter)
 app.use('/api', SellerRouter)
 app.use('/api', CustomerRouter)
+app.use('/api', FoodRouter)
 app.use('/page', PageRouter)
 
 app.use((req, res, next) => {
