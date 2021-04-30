@@ -15,7 +15,7 @@ class ComponentController {
 
     async getAllComponents(req, res) {
         try {
-            const Components = await db.query('SELECT Name From Component');
+            const Components = await db.query('SELECT * From Component');
             res.json(Components.rows);
         }
         catch (ex) {

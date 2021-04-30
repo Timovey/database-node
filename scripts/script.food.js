@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         table.append(`<thead><tr><th scope="col">Название</th><th scope="col">Описание</th><th scope="col">Цена</th><th scope="col">Действия</th></tr></thead><tbody>`);
         for (var i in json) {
 
-            table.append("<tr><td>" + json[i].name + "</td>" +"<td>" + json[i].description + "</td>" + "<td>" + json[i].price+ "</td>" + `<td class="edit_menu"><a class='edit_menu_item' href="http://localhost:8000/page/food.update.html?name=${json[i].name}">
+            table.append("<tr><td>" + json[i].name + "</td>" +"<td>" + json[i].description + "</td>" + "<td>" + json[i].price+ "</td>" + `<td class="edit_menu"><a class='edit_menu_item' href="http://localhost:8000/page/food.update.html?name=${json[i].name}&description=${json[i].description}&price=${json[i].price}">
             редактировать</a><a class='edit_menu_item' href="http://localhost:8000/api/Fooddel?name=${json[i].name}">удалить</a>
             </td></tr>`);
 
@@ -41,14 +41,10 @@ formElem.addEventListener('submit', function (event) {
 });
 
 async function addFood(values) {
-    let valname = values[0];
-    let valdesc = values[1];
-    let valprice = values[2];
-    console.log(valname, valdesc, valprice);
     try {
-        const url = "http://localhost:8000/api/Food";
-        console.log(JSON.stringify({ "name": values[0], "description": values[1], "price": values[2] }));
-        const response = await fetch(url, {
+        const urlfood = "http://localhost:8000/api/Food";
+        //console.log(JSON.stringify({ "name": values[0], "description": values[1], "price": values[2] }));
+        const response = await fetch(urlfood, {
             method: 'POST',
             body: JSON.stringify({ "name": values[0], "description": values[1], "price": values[2] }), // данные могут быть 'строкой' или {объектом}!
             headers: {
@@ -57,7 +53,29 @@ async function addFood(values) {
         });
         const json = await response.json();
         console.log('Успех:', JSON.stringify(json));
-        document.location.href = "http://localhost:8000/page/food.html";
+        //console.log(json.id_food);
+        const urlstorage = "http://localhost:8000/api/Storage";
+        //console.log(JSON.stringify({ "name": values[0], "description": values[1], "price": values[2] }));
+        for(var i in values) {
+            if(i == 0 || i == 1 || i == 2) {
+                continue;
+            }
+            console.log(values[i]);
+
+            const respon = await fetch(urlstorage, {
+                method: 'POST',
+                body: JSON.stringify({ "id_food": json.id_food, "name_component": values[i], "amount": 1}), // данные могут быть 'строкой' или {объектом}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const js = await respon.json();
+
+            
+            console.log('Успех:', JSON.stringify(js));
+        }
+
+       document.location.href = "http://localhost:8000/page/food.html";
     }
     catch (error) {
         console.error('Ошибка:', error);

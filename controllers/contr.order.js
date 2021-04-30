@@ -1,0 +1,77 @@
+const db = require('../consetting')
+
+class OrderController {
+
+    async createOrder(req, res) {
+        try {
+            //console.log("ss");
+            const { id_customer, id_seller, amount } = req.body
+
+            const newOrder = await db.query(`INSERT INTO Order (id_customer, id_seller, amount) values ($1, $2, $3) RETURNING *`, [id_customer, id_seller, amount ])
+            console.log("ssxd");
+            res.json(newOrder.rows[0]).status(200);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    };
+
+    async getAllOrders(req, res) {
+        try {
+            const Orders = await db.query('SELECT id_customer, id_seller, amount From Order');
+            res.json(Orders.rows);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    };
+
+    async getFilterOrders(req, res) {
+        try {
+            const date = req.query.date;
+            const Orders = await db.query('SELECT id_order From Order where date = $1 ', [date]);
+            res.json(Orders.rows);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    };
+
+    async getOrder(req, res) {
+        try {
+            const id_seller = req.query.id_seller;
+            const id_customer = req.query.id_customer;
+            //console.log(name);
+            const Order = await db.query('SELECT * From Order WHERE id_seller = $1 AND id_customer = $2', [id_seller, id_customer]);
+            res.json(Order.rows[0]);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    }
+    async updateOrder(req, res) {
+        try {
+            const { id_order, id_seller, id_customer, date } = req.body;
+            //console.log(req.body);
+            const Order = await db.query('UPDATE Order set id_seller = $1, id_customer = $2, date = $3 WHERE id_order = $4 RETURNING id_seller, id_customer, date ', [ id_seller, id_customer, date, id_order]);
+            res.json(Order.rows[0]);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    }
+
+
+    async deleteOrder(req, res) {
+        try {
+            const id_order = req.query.id_order;
+            const Order = await db.query('DELETE From order WHERE id_order = $1', id_order]);
+            res.json('Food delete');
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    }
+}
+
+module.exports = new OrderController()

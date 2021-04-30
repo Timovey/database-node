@@ -26,6 +26,16 @@ class FoodController {
         }
     };
 
+    async getFilterFoods(req, res) {
+        try {
+            const name_food = req.query.name_food;
+            const Components = await db.query('SELECT id_component From storage where id_food = (select id_food from food where name = $1)', [name_food]);
+            res.json(Components.rows);
+        }
+        catch (ex) {
+            console.log(ex.massage);
+        }
+    };
 
     async getFood(req, res) {
         try {
@@ -54,7 +64,7 @@ class FoodController {
     async deleteFood(req, res) {
         try {
             const name = req.query.name;
-            const Food = await db.query('DELETE From Food WHERE Name = $1', [Name]);
+            const Food = await db.query('DELETE From Food WHERE Name = $1', [name]);
             res.json('Food delete');
         }
         catch (ex) {
