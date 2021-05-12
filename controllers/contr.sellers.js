@@ -16,7 +16,7 @@ class SellerController {
 
     async getAllSellers(req, res) {
         try {
-            const Sellers = await db.query('SELECT Name, Surname, Salary From Seller');
+            const Sellers = await db.query('SELECT * From Seller');
             res.json(Sellers.rows);
         }
         catch (ex) {

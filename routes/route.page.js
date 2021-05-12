@@ -34,6 +34,16 @@ router.get('/script.seller.js', (req, res) => {
         console.log(ex);
     }
 });
+router.get('/script.index.js', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../scripts/script.index.js'));
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
 router.get('/script.updseller.js', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, '../scripts/script.updseller.js'));
@@ -220,6 +230,17 @@ router.get('/customer.update.html', (req, res) => {
 router.get('/food.add.html', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, '../views/food.add.html'));
+        res.status(200);
+    }
+    catch (ex) {
+        res.status(400);
+        console.log(ex);
+    }
+});
+
+router.get('/index.add.html', (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../views/index.add.html'));
         res.status(200);
     }
     catch (ex) {

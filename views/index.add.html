@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="http://localhost:8000/page/style.css">
-    <title>Ингридиенты</title>
+    <title>Добавление заказа</title>
 </head>
 
 <body>
@@ -30,12 +30,21 @@
     <section class="add">
         <div class="container">
             <form action="#" method="get">
-                <h3>Название</h3>
-                <input id="3" type="text" name="name_component" value="карп">
+                <div>Продавец</div>
+                <select id="7" name="sellers" required>
+                    <option disabled>Выберите продавца</option>
+                   </select>
+                <div>Покупатель</div>
+                <select id="8" name="customers" required>
+                    <option disabled>Выберите покупателя</option>
+                   </select>
+                <div>Цена</div>
+                <input id="9" type="number" name="price" value="0" readonly required>
+                <div id="6"></div>
                 <div class="btn">
-                    <input type="submit" value="Изменить">
+                    <input type="submit" value="Сохранить">
                     <button>
-                        <a href="component.html">Отмена</a>
+                        <a href="food.html">Отмена</a>
                     </button>
                 </div>
 
@@ -43,8 +52,9 @@
         </div>
     </section>
 
+
     <script type="text/javascript" src="http://localhost:8000/page/jquery.js"></script>
-    <script type="text/javascript" src="http://localhost:8000/page/script.updcomponent.js"></script>
+    <script type="text/javascript" src="http://localhost:8000/page/script.index.js"></script>
 </body>
 
 </html>

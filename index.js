@@ -8,6 +8,8 @@ const CustomerRouter = require('./routes/route.customer')
 const FoodRouter = require('./routes/route.food')
 const StorageRouter = require('./routes/route.storage')
 const TimeRouter = require('./routes/route.time')
+const OrderFoodRouter = require('./routes/route.orderfood')
+const OrderRouter = require('./routes/route.order')
 
 const port = 8000
 
@@ -17,6 +19,8 @@ app.use('/api', SellerRouter)
 app.use('/api', CustomerRouter)
 app.use('/api', FoodRouter)
 app.use('/api', StorageRouter)
+app.use('/api', OrderFoodRouter)
+app.use('/api', OrderRouter)
 app.use('/page', PageRouter)
 app.use('/', TimeRouter)
 

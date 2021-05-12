@@ -4,9 +4,9 @@ const OrderController = require('../controllers/contr.order')
 
 router.post('/Order', OrderController.createOrder)
 router.get('/Orders', OrderController.getAllOrders)
-router.get('/Order', OrderController)
-router.get('/Orderfil', FoodController.getFilterFoods)
-router.put('/Order', FoodController .updateFood)
-router.get('/Orderdel', FoodController .deleteFood)
+router.get('/Order', OrderController.getOrder)
+router.get('/Orderfil', OrderController.getFilterOrders)
+router.put('/Order', OrderController.updateOrder)
+router.get('/Orderdel', OrderController.deleteOrder)
 
 module.exports = router

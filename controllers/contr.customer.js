@@ -17,7 +17,7 @@ class CustomerController {
     async getAllCustomers(req, res) {
         try {
             console.log("scdsdc");
-            const Customers = await db.query('SELECT Name, Surname From Customer');
+            const Customers = await db.query('SELECT * From Customer');
             res.json(Customers.rows);
         }
         catch (ex) {

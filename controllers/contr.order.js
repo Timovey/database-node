@@ -5,10 +5,10 @@ class OrderController {
     async createOrder(req, res) {
         try {
             //console.log("ss");
-            const { id_customer, id_seller, amount } = req.body
+            const { id_customer, id_seller, totalprice } = req.body
 
-            const newOrder = await db.query(`INSERT INTO Order (id_customer, id_seller, amount) values ($1, $2, $3) RETURNING *`, [id_customer, id_seller, amount ])
-            console.log("ssxd");
+            const newOrder = await db.query(`INSERT INTO Orders (id_customer, id_seller, totalprice) values ($1, $2, $3) RETURNING *`, [id_customer, id_seller, totalprice ])
+            //console.log("ssxd");
             res.json(newOrder.rows[0]).status(200);
         }
         catch (ex) {
@@ -18,7 +18,8 @@ class OrderController {
 
     async getAllOrders(req, res) {
         try {
-            const Orders = await db.query('SELECT id_customer, id_seller, amount From Order');
+            //console.log("sdcsdcsdc")
+            const Orders = await db.query('SELECT * from v_reportorder');
             res.json(Orders.rows);
         }
         catch (ex) {
@@ -29,7 +30,7 @@ class OrderController {
     async getFilterOrders(req, res) {
         try {
             const date = req.query.date;
-            const Orders = await db.query('SELECT id_order From Order where date = $1 ', [date]);
+            const Orders = await db.query('SELECT id_order From Orders where date = $1 ', [date]);
             res.json(Orders.rows);
         }
         catch (ex) {
@@ -41,8 +42,9 @@ class OrderController {
         try {
             const id_seller = req.query.id_seller;
             const id_customer = req.query.id_customer;
+            const date = req.query.date;
             //console.log(name);
-            const Order = await db.query('SELECT * From Order WHERE id_seller = $1 AND id_customer = $2', [id_seller, id_customer]);
+            const Order = await db.query('SELECT * From Orders WHERE id_seller = $1 AND id_customer = $2 AND date = $3', [id_seller, id_customer, date]);
             res.json(Order.rows[0]);
         }
         catch (ex) {
@@ -53,7 +55,7 @@ class OrderController {
         try {
             const { id_order, id_seller, id_customer, date } = req.body;
             //console.log(req.body);
-            const Order = await db.query('UPDATE Order set id_seller = $1, id_customer = $2, date = $3 WHERE id_order = $4 RETURNING id_seller, id_customer, date ', [ id_seller, id_customer, date, id_order]);
+            const Order = await db.query('UPDATE Orders set id_seller = $1, id_customer = $2, date = $3 WHERE id_order = $4 RETURNING id_seller, id_customer, date ', [ id_seller, id_customer, date, id_order]);
             res.json(Order.rows[0]);
         }
         catch (ex) {
@@ -65,7 +67,7 @@ class OrderController {
     async deleteOrder(req, res) {
         try {
             const id_order = req.query.id_order;
-            const Order = await db.query('DELETE From order WHERE id_order = $1', [id_order]);
+            const Order = await db.query('DELETE From orders WHERE id_order = $1', [id_order]);
             res.json('Food delete');
         }
         catch (ex) {

@@ -87,7 +87,7 @@ formElem.addEventListener("formdata", event => {
 
     const entries = [...data.entries()];
     const values = [...data.values()];
-    console.log(entries);
-    console.log(values);
+    //console.log(entries);
+    //console.log(values);
     addFood(values);
 });
