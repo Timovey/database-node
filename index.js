@@ -7,6 +7,7 @@ const SellerRouter = require('./routes/route.seller')
 const CustomerRouter = require('./routes/route.customer')
 const FoodRouter = require('./routes/route.food')
 const StorageRouter = require('./routes/route.storage')
+const TimeRouter = require('./routes/route.time')
 
 const port = 8000
 
@@ -17,6 +18,7 @@ app.use('/api', CustomerRouter)
 app.use('/api', FoodRouter)
 app.use('/api', StorageRouter)
 app.use('/page', PageRouter)
+app.use('/', TimeRouter)
 
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!")

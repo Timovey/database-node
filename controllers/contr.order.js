@@ -65,7 +65,7 @@ class OrderController {
     async deleteOrder(req, res) {
         try {
             const id_order = req.query.id_order;
-            const Order = await db.query('DELETE From order WHERE id_order = $1', id_order]);
+            const Order = await db.query('DELETE From order WHERE id_order = $1', [id_order]);
             res.json('Food delete');
         }
         catch (ex) {

@@ -3,7 +3,8 @@ var description = "";
 var price = 0;
 var id = -1;
 var arr_ids = new Array();
-var arr_finish = new Array();
+var compid;
+const URL = "http://localhost:8000/api/";
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM готов!");
     var elem1 = $('#3');
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (i = 0; i < json.length; i++) {
 
 
-           console.log(json[i].id_component);
+           //console.log(json[i].id_component);
             arr_ids[i] = json[i].id_component;
         }
         // for(h = 0; h <= arr_ids[h];h++) {
@@ -68,7 +69,78 @@ formElem.addEventListener('submit', function (event) {
 
 async function updateFood(values) {
     try {
-        //console.log(val);
+        
+
+        if(values.length == 3) {
+            $.getJSON(`http://localhost:8000/api/Storagedelall`, function (json) {
+
+            });
+            console.log("все удалено из Starage");
+        }
+        else {
+            //console.log(arr_ids);
+            for(var i in values) {
+                if(i == 0 || i == 1 || i == 2) {
+                    continue;
+                }
+                //console.log(values[i]);
+
+                const url = `http://localhost:8000/api/Component?name_component=${values[i]}`;
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const json = await response.json();
+                compid = json.id_component;
+
+                const index = arr_ids.indexOf(compid);
+                if (index > -1) {
+                    //console.log(`элемент удален + ${arr_ids[index]}`);
+                    arr_ids.splice(index, 1);
+                //console.log(arr_ids);
+                }
+                                
+                const urlt = `http://localhost:8000/api/Storage?id_food=${id}&id_component=${compid}`;
+                const responset = await fetch(urlt, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const jsont = await responset.json();
+                //console.log(jsont.id_food);
+                
+                if(jsont.id_component == -1) {
+                    console.log("таких элементов не было, надо добавить");
+                            const respon = await  fetch(`${URL}StorageId`, {
+                                method: 'POST',
+                                body: JSON.stringify({ "id_food": id, "id_component": compid, "amount": 1}), // данные могут быть 'строкой' или {объектом}!
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            const js = await respon.json();
+
+                }
+
+                //console.log(jsont);
+            }
+            console.log(arr_ids);
+            for(i = 0; i < arr_ids.length; i++) {
+                const urlt = `http://localhost:8000/api/Storagedel?id_food=${id}&id_component=${arr_ids[i]}`;
+                const responset = await fetch(urlt, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const json = await responset.json();
+                console.log(json);
+            }
+        }
+
         const url = "http://localhost:8000/api/Food";
         const response = await fetch(url, {
             method: 'PUT',
@@ -79,53 +151,6 @@ async function updateFood(values) {
         });
         const json = await response.json();
         console.log('Успех:', JSON.stringify(json));
-
-        for(var i in values) {
-            if(i == 0 || i == 1 || i == 2) {
-                continue;
-            }
-            //console.log(arr_ids);
-            var svar;
-            $.getJSON(`http://localhost:8000/api/Component?name_component=${values[i]}`, function (jsong) {
-                svar = jsong.id_component;
-                //console.log(svar);
-               // console.log(arr_ids);
-            });
-            console.log(arr_ids);
-            console.log(svar);
-            if(arr_ids.includes(svar)) {
-                console.log(1);
-                for(i = 0; i < arr_ids.length;i++) {
-                    if(arr_ids[i] == svar) {
-                        arr_ids.splice(i, 1);
-                    }
-                }
-                //arr_ids.remove(svar);
-            }
-            else {
-                //console.log(JSON.stringify({ "id_food": id, "name_component": values[i], "amount": 1 }));
-                const respon = await fetch("http://localhost:8000/api/Storage", {
-                    method: 'POST',
-                    body: JSON.stringify({ "id_food": id, "name_component": values[i], "amount": 1 }), // данные могут быть 'строкой' или {объектом}!
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const js = await respon.json();
-    
-                console.log("app");
-                console.log('Успех:', JSON.stringify(js));
-            }
-            for(var i in arr_ids) {
-                $.getJSON(`http://localhost:8000/api/Storagedel?id_food=${id}&id_component=${i}`, function (json) {
-
-                    console.log("del");
-                   // console.log(arr_ids);
-                });
-            }
-
-           
-        }
         document.location.href = "http://localhost:8000/page/food.html";
     }
     catch (error) {
@@ -136,6 +161,6 @@ formElem.addEventListener("formdata", event => {
     const data = event.formData;
 
     const values = [...data.values()];
-    console.log(values);
+    //console.log(values);
     updateFood(values);
 });
