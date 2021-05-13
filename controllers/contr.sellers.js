@@ -1,5 +1,7 @@
 const db = require('../consetting')
-
+const fs = require('fs')
+const path = require('path');
+const del = require('../madedelete/returndelete')
 class SellerController {
 
     async createSeller(req, res) {
@@ -54,10 +56,12 @@ class SellerController {
         try {
             const Name = req.query.name;
             const Surame = req.query.surname;
-            console.log("dd");
+            //console.log("dd");
             const Seller = await db.query('DELETE From Seller WHERE Name = $1 AND Surname = $2', [Name, Surame]);
-            console.log("sss");
-            res.json('Seller delete');
+            //console.log("ddd324");
+            del.makeDeleteFile('seller');
+            console.log("ddd");
+            res.sendFile(path.join(__dirname, '../views/delete.one.html'));
         }
         catch (ex) {
             console.log(ex.massage);

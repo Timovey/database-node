@@ -1,5 +1,7 @@
 const db = require('../consetting')
-
+const fs = require('fs')
+const path = require('path');
+const del = require('../madedelete/returndelete')
 class ComponentController {
 
     async createComponent(req, res) {
@@ -52,7 +54,8 @@ class ComponentController {
             const name = req.query.name_component;
             console.log(name);
             const Component = await db.query('DELETE From Component WHERE Name = $1', [name]);
-            res.json('Component delete');
+            del.makeDeleteFile('component');
+            res.sendFile(path.join(__dirname, '../views/delete.one.html'));
         }
         catch (ex) {
             console.log(ex.massage);

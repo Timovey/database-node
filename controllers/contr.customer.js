@@ -1,5 +1,7 @@
 const db = require('../consetting')
-
+const del = require('../madedelete/returndelete')
+const fs = require('fs')
+const path = require('path');
 class CustomerController {
 
     async createCustomer(req, res) {
@@ -56,9 +58,11 @@ class CustomerController {
             const Name = req.query.name;
             const Surame = req.query.surname;
             //console.log("dd");
-            const Seller = await db.query('DELETE From Customer WHERE Name = $1 AND Surname = $2', [Name, Surame]);
+            const Customer = await db.query('DELETE From Customer WHERE Name = $1 AND Surname = $2', [Name, Surame]);
             //console.log("sss");
-            res.json('Customer delete');
+            del.makeDeleteFile('customer');
+            res.sendFile(path.join(__dirname, '../views/delete.one.html'));
+           //res.json("Delete");
         }
         catch (ex) {
             console.log(ex.massage);

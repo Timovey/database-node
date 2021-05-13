@@ -1,5 +1,7 @@
 const db = require('../consetting')
-
+const fs = require('fs')
+const path = require('path');
+const del = require('../madedelete/returndelete')
 class StorageController {
 
     async createStorage(req, res) {

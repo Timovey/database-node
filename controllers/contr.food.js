@@ -1,5 +1,7 @@
 const db = require('../consetting')
-
+const fs = require('fs')
+const path = require('path');
+const del = require('../madedelete/returndelete')
 class FoodController {
 
     async createFood(req, res) {
@@ -18,7 +20,7 @@ class FoodController {
 
     async getAllFoods(req, res) {
         try {
-            const Foods = await db.query('SELECT Name, Description, Price From Food');
+            const Foods = await db.query('SELECT * From Food');
             res.json(Foods.rows);
         }
         catch (ex) {
@@ -65,7 +67,8 @@ class FoodController {
         try {
             const name = req.query.name;
             const Food = await db.query('DELETE From Food WHERE Name = $1', [name]);
-            res.json('Food delete');
+            del.makeDeleteFile('food');
+            res.sendFile(path.join(__dirname, '../views/delete.one.html'));
         }
         catch (ex) {
             console.log(ex.massage);

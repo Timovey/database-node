@@ -1,13 +1,16 @@
 const db = require('../consetting')
-
+const fs = require('fs')
+const del = require('../madedelete/returndelete')
+const path = require('path');
 class OrderFoodController {
 
     async createOrderFood(req, res) {
         try {
-            //console.log("ss");
-            const { id_order, id_food, amount } = req.body
+            console.log("ss");
 
-            const newOrderFood = await db.query(`INSERT INTO OrderFood (id_order, id_food, amount) values ($1, $2, $3) RETURNING *`, [id_order, id_food, amount])
+            const { id_order, id_food} = req.body
+            console.log(id_order, id_food);
+            const newOrderFood = await db.query(`INSERT INTO OrderFood (id_order, id_food) values ($1, $2) RETURNING *`, [id_order, id_food])
             //console.log("ssxd");
             res.json(newOrderFood.rows[0]).status(200);
         }
