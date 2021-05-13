@@ -1,0 +1,31 @@
+
+SELECT * From Customer ... TIME: 6
+SELECT * From Food ... TIME: 7
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 2
+SELECT * From Customer ... TIME: 1
+SELECT * From Customer ... TIME: 1
+SELECT * From Food ... TIME: 2
+SELECT * From Customer ... TIME: 7
+SELECT * From Food ... TIME: 8
+SELECT * From Customer ... TIME: 4
+SELECT * From Food ... TIME: 2
+SELECT * From Component ... TIME: 4
+SELECT * From Component ... TIME: 1
+INSERT INTO Component (Name) values ($1) RETURNING Name... TIME: 112
+SELECT * From Component ... TIME: 1
+SELECT id_component From Component WHERE Name ... TIME: 1
+UPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name ... TIME: 110
+SELECT * From Component ... TIME: 1
+DELETE From Component WHERE Name = $1... TIME: 89
+SELECT * From Food ... TIME: 1
+SELECT * From Customer ... TIME: 6
+SELECT * From Component ... TIME: 3
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 1
+INSERT INTO Customer (Name, Surname) values ($1, $2) RETURNING Name, Surname ... TIME: 102
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 6
+SELECT * From Food ... TIME: 8
+SELECT * From Component ... TIME: 2

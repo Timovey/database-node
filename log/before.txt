@@ -1,0 +1,175 @@
+
+SELECT * From Customer ... TIME: 30
+SELECT * From Food ... TIME: 55
+SELECT * From Component ... TIME: 10
+SELECT * From Food ... TIME: 16
+SELECT * From Component ... TIME: 23
+SELECT * From Customer ... TIME: 3
+SELECT * From Component ... TIME: 29
+SELECT * From Food ... TIME: 41
+SELECT * From Customer ... TIME: 6
+SELECT * From Component ... TIME: 18
+SELECT * From Food ... TIME: 26
+SELECT * From Component ... TIME: 4
+SELECT * From Customer ... TIME: 4
+SELECT * From Customer ... TIME: 18
+SELECT * From Food ... TIME: 21
+SELECT * From Customer ... TIME: 20
+SELECT * From Food ... TIME: 43
+SELECT * From Component ... TIME: 5
+SELECT * From Customer ... TIME: 17
+SELECT * From Food ... TIME: 35
+SELECT * From Customer ... TIME: 9
+SELECT * From Food ... TIME: 54
+SELECT * From Customer ... TIME: 57
+SELECT * From Food ... TIME: 67
+SELECT * From Customer ... TIME: 57
+SELECT * From Food ... TIME: 67
+SELECT * From Food ... TIME: 14
+SELECT * From Customer ... TIME: 19
+SELECT * From Customer ... TIME: 15
+SELECT * From Food ... TIME: 26
+SELECT * From Customer ... TIME: 15
+SELECT * From Food ... TIME: 38
+SELECT * From Customer ... TIME: 3
+SELECT * From Food ... TIME: 16
+SELECT * From Customer ... TIME: 25
+SELECT * From Food ... TIME: 35
+SELECT * From Customer ... TIME: 27
+SELECT * From Food ... TIME: 33
+SELECT * From Customer ... TIME: 5
+SELECT * From Food ... TIME: 20
+SELECT * From Component ... TIME: 2
+SELECT * From Customer ... TIME: 8
+SELECT * From Food ... TIME: 14
+SELECT * From Customer ... TIME: 20
+SELECT * From Food ... TIME: 23
+SELECT * From Customer ... TIME: 14
+SELECT * From Food ... TIME: 20
+SELECT * From Customer ... TIME: 15
+SELECT * From Food ... TIME: 14
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 1
+SELECT * From Customer ... TIME: 12
+SELECT * From Food ... TIME: 13
+SELECT * From Customer ... TIME: 12
+SELECT * From Food ... TIME: 17
+SELECT * From Customer ... TIME: 17
+SELECT * From Food ... TIME: 15
+SELECT * From Customer ... TIME: 37
+SELECT * From Food ... TIME: 48
+SELECT * From Customer ... TIME: 34
+SELECT * From Food ... TIME: 35
+SELECT * From Customer ... TIME: 25
+SELECT * From Food ... TIME: 7
+SELECT * From Customer ... TIME: 3
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 2
+SELECT id_component From Component WHERE Name ... TIME: 2
+UPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name ... TIME: 128
+SELECT * From Component ... TIME: 1
+SELECT id_component From Component WHERE Name ... TIME: 1
+UPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name ... TIME: 91
+SELECT * From Component ... TIME: 1
+DELETE From Component WHERE Name = $1... TIME: 70
+SELECT * From Customer ... TIME: 3
+SELECT * From Food ... TIME: 1
+SELECT * From Food ... TIME: 6
+SELECT * From Component ... TIME: 5
+SELECT id_food From Food WHERE Name = $1 ... TIME: 3
+SELECT * From Component ... TIME: 5
+SELECT id_component From Component WHERE Name ... TIME: 6
+SELECT id_component From Component WHERE Name ... TIME: 1
+UPDATE Food set Name = $1, Description = $2, Price = $3 WHERE id_food = $4 RETURNING Name, Description, Price ... TIME: 60
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 1
+DELETE From Food WHERE Name = $1 ... TIME: 86
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 4
+SELECT * From Component ... TIME: 2
+DELETE From Food WHERE Name = $1 ... TIME: 84
+SELECT * From Food ... TIME: 1
+SELECT * From Customer ... TIME: 33
+SELECT * From Customer ... TIME: 12
+SELECT id_customer From Customer WHERE Name = $1 AND Surname = $2 ... TIME: 2
+UPDATE Customer set Name = $1, Surname = $2 WHERE id_customer = $3 RETURNING Name, Surname... TIME: 122
+SELECT * From Customer ... TIME: 14
+SELECT * From Customer ... TIME: 17
+UPDATE Customer set Name = $1, Surname = $2 WHERE id_customer = $3 RETURNING Name, Surname... TIME: 1
+SELECT * From Component ... TIME: 14
+SELECT * From Customer ... TIME: 13
+SELECT * From Customer ... TIME: 13
+SELECT * From Customer ... TIME: 5
+SELECT * From Customer ... TIME: 6
+SELECT * From Customer ... TIME: 1
+SELECT * From Customer ... TIME: 1
+SELECT * From Customer ... TIME: 2
+INSERT INTO Customer (Name, Surname) values ($1, $2) RETURNING Name, Surname ... TIME: 96
+SELECT * From Customer ... TIME: 1
+SELECT * From Food ... TIME: 2
+SELECT * From Component ... TIME: 6
+SELECT id_food From Food WHERE Name = $1 ... TIME: 4
+SELECT * From Component ... TIME: 7
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 6
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 3
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 1
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 1
+SELECT * From Food ... TIME: 2
+SELECT * From Customer ... TIME: 13
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 10
+SELECT * From Food ... TIME: 9
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 1
+SELECT * From Customer ... TIME: 3
+SELECT * From Customer ... TIME: 3
+SELECT * From Food ... TIME: 5
+SELECT * From Customer ... TIME: 2
+SELECT * From Food ... TIME: 2
+SELECT * From Customer ... TIME: 1
+SELECT * From Food ... TIME: 2
+SELECT * From Customer ... TIME: 2
+SELECT * From Food ... TIME: 6
+SELECT * From Component ... TIME: 2
+SELECT * From Component ... TIME: 1
+INSERT INTO Component (Name) values ($1) RETURNING Name... TIME: 109
+SELECT * From Component ... TIME: 1
+SELECT id_component From Component WHERE Name ... TIME: 1
+UPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name ... TIME: 132
+SELECT * From Component ... TIME: 2
+DELETE From Component WHERE Name = $1... TIME: 73
+SELECT * From Customer ... TIME: 2
+SELECT * From Food ... TIME: 7
+SELECT * From Food ... TIME: 2
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 2
+SELECT * From Component ... TIME: 1
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 1
+SELECT id_food From Food WHERE Name = $1 ... TIME: 2
+SELECT * From Component ... TIME: 5
+SELECT id_component From storage where id_food = (select id_food from food where name = $1)... TIME: 6
+SELECT id_component From Component WHERE Name ... TIME: 1
+SELECT id_component From Component WHERE Name ... TIME: 1
+UPDATE Food set Name = $1, Description = $2, Price = $3 WHERE id_food = $4 RETURNING Name, Description, Price ... TIME: 61
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 1
+DELETE From Food WHERE Name = $1 ... TIME: 79
+SELECT * From Component ... TIME: 2
+SELECT * From Food ... TIME: 1
+SELECT * From Component ... TIME: 5
+SELECT id_food From Food WHERE Name = $1 ... TIME: 3
+SELECT * From Component ... TIME: 7
+SELECT * From Food ... TIME: 2
+SELECT * From Component ... TIME: 4
+SELECT * From Customer ... TIME: 2
+SELECT * From Customer ... TIME: 2
+INSERT INTO Customer (Name, Surname) values ($1, $2) RETURNING Name, Surname ... TIME: 122
+SELECT * From Customer ... TIME: 1
+SELECT * From Customer ... TIME: 2

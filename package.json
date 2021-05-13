@@ -11,13 +11,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "damn-simple-xml": "^1.2.0",
     "dom-parser": "^0.1.6",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jquery": "^3.6.0",
+    "linq": "^3.2.3",
     "nodemon": "^2.0.7",
     "pg": "^8.6.0",
     "todo-list": "0.0.3",
-    "xmlbuilder": "^15.1.1"
+    "xml2js": "^0.4.23",
+    "xmlbuilder": "^15.1.1",
+    "xmldom": "^0.6.0",
+    "xnode-js": "^0.1.1",
+    "xpath": "0.0.32"
   }
 }
