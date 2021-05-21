@@ -14,7 +14,7 @@ class ComponentController {
             var t2 = new Date();
             var string = `\nINSERT INTO Component (Name) values ($1) RETURNING Name... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
            
             res.json(newComponent.rows[0]).status(200);
@@ -31,9 +31,9 @@ class ComponentController {
             var t2 = new Date();
             var string = `\nSELECT * From Component ... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
-            res.json(Components.rows);
+                        res.json(Components.rows);
         }
         catch (ex) {
             console.log(ex.massage);
@@ -49,7 +49,7 @@ class ComponentController {
             var t2 = new Date();
             var string = `\nSELECT id_component From Component WHERE Name ... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(Component.rows[0]);
         }
@@ -65,7 +65,7 @@ class ComponentController {
             var t2 = new Date();
             var string = `\nUPDATE Component set Name = $1 WHERE id_component = $2 RETURNING Name ... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             
             res.json(Component.rows[0]);

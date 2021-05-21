@@ -14,7 +14,7 @@ class CustomerController {
             var t2 = new Date();
             var string = `\nINSERT INTO Customer (Name, Surname) values ($1, $2) RETURNING Name, Surname ... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(newCustomer.rows[0]).status(200);
         }
@@ -31,7 +31,7 @@ class CustomerController {
             var t2 = new Date();
             var string = `\nSELECT * From Customer ... TIME: ${t2-t1}`;
             //console.log(string);
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(Customers.rows);
         }
@@ -46,7 +46,14 @@ class CustomerController {
             const Name = req.query.name;
             const Surname = req.query.surname;
 
+            var t1 = new Date();
             const Customer = await db.query('SELECT id_customer From Customer WHERE Name = $1 AND Surname = $2', [Name, Surname]);
+            var t2 = new Date();
+            var string = `\nSELECT id_customer From Customer WHERE Name = $1 AND Surname = $2 ... TIME: ${t2-t1}`;
+            //console.log(string);
+            await fs.appendFile(filePath , string, function(err) {
+            });
+            
 
             res.json(Customer.rows[0]);
         }
@@ -57,8 +64,12 @@ class CustomerController {
     async updateCustomer(req, res) {
         try {
             const { id, name, surname} = req.body;
-       // console.log(req.body);
+            var t1 = new Date();
             const Customer = await db.query('UPDATE Customer set Name = $1, Surname = $2 WHERE id_customer = $3 RETURNING Name, Surname', [name, surname, id]);
+            var t2 = new Date();
+            var string = `\nUPDATE Customer set Name = $1, Surname = $2 WHERE id_customer = $3 RETURNING Name, Surname ... TIME: ${t2-t1}`;
+            await fs.appendFile(filePath , string, function(err) {
+            });
           //  console.log('sdc');
             res.json(Customer.rows[0]);
         }
@@ -72,9 +83,12 @@ class CustomerController {
         try {
             const Name = req.query.name;
             const Surame = req.query.surname;
-
+            var t1 = new Date();
             const Customer = await db.query('DELETE From Customer WHERE Name = $1 AND Surname = $2', [Name, Surame]);
-
+            var t2 = new Date();
+            var string = `\nDELETE From Customer WHERE Name = $1 AND Surname = $2... TIME: ${t2-t1}`;
+            await fs.appendFile(filePath , string, function(err) {
+            });
             del.makeDeleteFile('customer');
             res.sendFile(path.join(__dirname, '../views/delete.one.html'));
            //res.json("Delete");

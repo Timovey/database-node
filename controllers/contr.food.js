@@ -9,7 +9,14 @@ class FoodController {
         try {
            // console.log("ss");
             const { name, description, price } = req.body
+            var t1 = new Date();
             const newFood = await db.query(`INSERT INTO Food (Name, Description, Price) values ($1, $2, $3) RETURNING *`, [name, description, price])
+            var t2 = new Date();
+            var string = `\nINSERT INTO Food (Name, Description, Price) values ($1, $2, $3) RETURNING *... TIME: ${t2-t1}`;
+            //console.log(string);
+            await fs.appendFile(filePath , string, function(err) {
+            });
+            
             
            // console.log("ssxd");
             res.json(newFood.rows[0]).status(200);
@@ -25,7 +32,7 @@ class FoodController {
             const Foods = await db.query('SELECT * From Food');
             var t2 = new Date();
             var string = `\nSELECT * From Food ... TIME: ${t2-t1}`;
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(Foods.rows);
         }
@@ -38,10 +45,11 @@ class FoodController {
         try {
             const name_food = req.query.name_food;
             var t1 = new Date();
+            console.log(name_food);
             const Components = await db.query('SELECT id_component From storage where id_food = (select id_food from food where name = $1)', [name_food]);
             var t2 = new Date();
             var string = `\nSELECT id_component From storage where id_food = (select id_food from food where name = $1)... TIME: ${t2-t1}`;
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(Components.rows);
         }
@@ -57,7 +65,7 @@ class FoodController {
             const Food = await db.query('SELECT id_food From Food WHERE Name = $1', [name]);
             var t2 = new Date();
             var string = `\nSELECT id_food From Food WHERE Name = $1 ... TIME: ${t2-t1}`;
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             
             res.json(Food.rows[0]);
@@ -73,7 +81,7 @@ class FoodController {
             const Food = await db.query('UPDATE Food set Name = $1, Description = $2, Price = $3 WHERE id_food = $4 RETURNING Name, Description, Price', [name, description, price, id]);
             var t2 = new Date();
             var string = `\nUPDATE Food set Name = $1, Description = $2, Price = $3 WHERE id_food = $4 RETURNING Name, Description, Price ... TIME: ${t2-t1}`;
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             res.json(Food.rows[0]);
         }
@@ -90,7 +98,7 @@ class FoodController {
             const Food = await db.query('DELETE From Food WHERE Name = $1', [name]);
             var t2 = new Date();
             var string = `\nDELETE From Food WHERE Name = $1 ... TIME: ${t2-t1}`;
-            fs.appendFileSync(filePath , string, function(err) {
+            await fs.appendFile(filePath , string, function(err) {
             });
             del.makeDeleteFile('food');
             res.sendFile(path.join(__dirname, '../views/delete.one.html'));
